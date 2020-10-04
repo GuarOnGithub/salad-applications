@@ -18,6 +18,7 @@ const login = 'login'
 const logout = 'logout'
 
 const AUTO_LAUNCH = 'AUTO_LAUNCH'
+const PAIN = 'PAIN'
 const MINIMIZE_TO_TRAY = 'MINIMIZE_TO_TRAY'
 const NOTIFY_ON_MINIMIZE_TO_TRAY = 'NOTIFY_ON_MINIMIZE_TO_TRAY'
 
@@ -48,6 +49,9 @@ export class NativeStore {
 
   @observable
   public autoLaunch: boolean = true
+
+  @observable
+  public pain: boolean = true
 
   @observable
   public minimizeToTray: boolean = true
@@ -216,6 +220,15 @@ export class NativeStore {
   }
 
   @action
+  togglePain = () => {
+    if (this.pain) {
+      this.disablePain()
+    } else {
+      this.enablePain()
+    }
+  }
+
+  @action
   toggleMinimizeToTray = () => {
     if (this.minimizeToTray) {
       this.disableMinimizeToTray()
@@ -248,6 +261,18 @@ export class NativeStore {
     Storage.setItem(AUTO_LAUNCH, 'false')
 
     this.send(disableAutoLaunch)
+  }
+
+  @action
+  enablePain = () => {
+    this.pain = true
+    Storage.setItem(PAIN, 'true')
+  }
+
+  @action
+  disablePain = () => {
+    this.pain = false
+    Storage.setItem(PAIN, 'false')
   }
 
   @action

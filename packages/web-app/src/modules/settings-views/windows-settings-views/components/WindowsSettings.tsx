@@ -31,6 +31,8 @@ interface Props extends WithStyles<typeof styles> {
   minimizeToTrayToggle?: () => void
   notifyOnMinimizeToTray?: boolean
   notifyOnMinimizeToTrayToggle?: () => void
+  pain?: boolean
+  painToggle?: () => void
 }
 
 class _WindowsSettings extends Component<Props> {
@@ -49,6 +51,8 @@ class _WindowsSettings extends Component<Props> {
       minimizeToTrayToggle,
       notifyOnMinimizeToTray,
       notifyOnMinimizeToTrayToggle,
+      pain,
+      painToggle,
     } = this.props
 
     return (
@@ -65,6 +69,8 @@ class _WindowsSettings extends Component<Props> {
           toggled={autoLaunch}
           onToggle={autoLaunchToggle}
         />
+        <Divider />
+        <ToggleSetting title={'FireBlu'} description={'Burn your eyes.'} toggled={pain} onToggle={painToggle} />
         {autoStartEnabled && (
           <>
             <Divider />
